@@ -9,7 +9,8 @@ namespace OzonSellerApi.Model
 {
 	public class ApiMethodParamsBase : EntityBase
 	{
-
+		[JsonProperty("language")]
+		public string Language { get; set; } = "RU";
 	}
 
 	/// <summary>
@@ -22,7 +23,38 @@ namespace OzonSellerApi.Model
 
 	}
 
-	public class DeliveryMethodListParameters : ApiMethodParamsWithFilter<DeliveryMethodListFilter>
+    public class CategoryTreeParameters : ApiMethodParamsBase
+    {
+    }
+
+    public class CategoryAttributesParameters : ApiMethodParamsBase
+    {
+        [JsonProperty("category_id")]
+        public long CategoryID { get; set; }
+
+        [JsonProperty("type_id")]
+        public long TypeID { get; set; }
+    }
+
+    public class AttributeValuesParameters : ApiMethodParamsBase
+    {
+        [JsonProperty("category_id")]
+        public long CategoryID { get; set; }
+
+        [JsonProperty("type_id")]
+        public int TypeID { get; set; }
+
+        [JsonProperty("attribute_id")]
+        public long AttributeID { get; set; }
+
+        [JsonProperty("last_value_id")]
+        public long LastValueID { get; set; }
+
+        [JsonProperty("limit")]
+        public long Limit { get; set; } = 5000;
+    }
+
+    public class DeliveryMethodListParameters : ApiMethodParamsWithFilter<DeliveryMethodListFilter>
 	{
 		[JsonProperty("offset")]
 		public int Offset { get; set; }

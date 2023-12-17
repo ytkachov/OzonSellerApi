@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonSellerApi", "OzonSellerApi\OzonSellerApi.csproj", "{A25A0E43-761B-4DA6-BDD1-EC1DE9EB576A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonSellerApi", "OzonSellerApi\OzonSellerApi.csproj", "{A25A0E43-761B-4DA6-BDD1-EC1DE9EB576A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{AC333778-70D8-404A-BAA7-AF01D0121C5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{5DECD578-527E-4AF0-8E69-E694FFC4BB97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{A25A0E43-761B-4DA6-BDD1-EC1DE9EB576A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A25A0E43-761B-4DA6-BDD1-EC1DE9EB576A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A25A0E43-761B-4DA6-BDD1-EC1DE9EB576A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC333778-70D8-404A-BAA7-AF01D0121C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC333778-70D8-404A-BAA7-AF01D0121C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC333778-70D8-404A-BAA7-AF01D0121C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC333778-70D8-404A-BAA7-AF01D0121C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DECD578-527E-4AF0-8E69-E694FFC4BB97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DECD578-527E-4AF0-8E69-E694FFC4BB97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DECD578-527E-4AF0-8E69-E694FFC4BB97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DECD578-527E-4AF0-8E69-E694FFC4BB97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

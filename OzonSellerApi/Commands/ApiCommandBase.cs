@@ -15,53 +15,39 @@ using System.Web;
 
 namespace OzonSellerApi.Commands
 {
-	public class ApiCommandBase<TOut>
-		where TOut : System.Collections.IList
+	public class ApiCommandBase<TOut> where TOut : System.Collections.IList
 	{
-		[JsonIgnore]
+		private ApiCommandAttributeBase _api_command_attribute;
 		private readonly static ILogger logger = LogManager.GetCurrentClassLogger();
-
-		[JsonIgnore]
 		public IApiConnection Connection { get; set; }
-
-		[JsonIgnore]
 		protected static JsonSerializerSettings SerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.None, NullValueHandling = NullValueHandling.Ignore };
-
-		[JsonIgnore]
-		private ApiCommandAttributeBase apiCommandAttribute;
-		[JsonIgnore]
-		private ApiCommandAttributeBase ApiCommandAttribute
+		private ApiCommandAttributeBase ApiCommand
 		{
 			get
 			{
-				if (apiCommandAttribute == null)
-					apiCommandAttribute = GetType().GetCustomAttribute<ApiCommandAttributeBase>(true);
+				if (_api_command_attribute == null)
+					_api_command_attribute = GetType().GetCustomAttribute<ApiCommandAttributeBase>(true);
 
-				return apiCommandAttribute;
+				return _api_command_attribute;
 			}
 		}
 
-		[JsonIgnore]
 		public HttpMethod Method { get; set; }
-
-		[JsonIgnore]
-		public ApiMethodParamsBase MethodParameters { get; set; } = new ApiMethodParamsBase();
-
-		[JsonIgnore]
+		public ApiMethodParamsBase MethodParameters { get; set; }
 		public string Url
 		{
 			get
 			{
-				if (ApiCommandAttribute == null)
+				if (ApiCommand == null)
 					return string.Empty;
 
-				return "/" + ApiCommandAttribute.SchemaVersion.ToString() + ApiCommandAttribute.Url;
+				return "/" + ApiCommand.SchemaVersion.ToString() + ApiCommand.Url;
 			}
 		}
 
 		public ApiCommandBase()
 		{
-			Method = ApiCommandAttribute.Method;  //Url?
+			Method = ApiCommand.Method;  //Url?
 		}
 
 		public ApiCommandBase(ApiConnection connection) : this()
@@ -69,19 +55,10 @@ namespace OzonSellerApi.Commands
 			Connection = connection;
 		}
 
-		[JsonIgnore]
 		public string JsonResponse { get; protected set; }
-
-		[JsonIgnore]
 		public ApiSimpleResponseMessage<TOut> Response { get; protected set; }
 
-		public virtual string Serialize()
-		{
-			var serializedData = JsonConvert.SerializeObject(MethodParameters, SerializerSettings);
-			return serializedData;
-		}
-
-		protected virtual TOut Deserialize(string jsonData, HttpResponseMessage response)
+    	protected virtual TOut Deserialize(string jsonData, HttpResponseMessage response)
 		{
 			var responseBase = JsonConvert.DeserializeObject<ApiResponseMessageBase>(jsonData, SerializerSettings);
 
@@ -110,7 +87,7 @@ namespace OzonSellerApi.Commands
 
 			logger.Info($"{this.GetType().Name} = {Url}, {data?.GetType().Name}");
 
-			var request = Serialize();
+			var request = MethodParameters?.ToJson();
 			try
 			{
 				HttpResponseMessage response = await Connection.PostRequestAsync(request, Url, Method);

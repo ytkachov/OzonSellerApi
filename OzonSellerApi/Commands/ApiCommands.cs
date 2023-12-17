@@ -10,12 +10,24 @@ using System.Threading.Tasks;
 
 namespace OzonSellerApi.ApiCommands
 {
-	[ApiGetCommand(Url = "/categories/tree", SchemaVersion = SchemaVersion.v1)]
+	[ApiPostCommand(Url = "/description-category/tree")]
 	public class GetCategoryTreeCommand : ApiCommandBase<List<Category>>
 	{
 	}
 
-	[ApiPostCommand(Url = "/warehouse/list")]
+    [ApiPostCommand(Url = "/description-category/attribute")]
+    public class GetCategoryAttributesCommand : ApiCommandBase<List<CategoryAttributes>>
+    {
+    }
+
+    [ApiPostCommand(Url = "/description-category/attribute/values")]
+    public class GetAttributeValuesCommand : ApiCommandBase<List<AttributeValues>>
+    {
+    }
+
+
+    // did not test it
+    [ApiPostCommand(Url = "/warehouse/list")]
 	public class GetWarehouseListCommand : ApiCommandBase<List<Warehouse>>
 	{
 	}

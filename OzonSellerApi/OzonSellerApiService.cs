@@ -23,18 +23,46 @@ namespace OzonSellerApi
 
 		public void Configure(string baseApiUrl = null, string apiKey = null, string clientId = null)
 		{
-			Instance.Connection.Configure(baseApiUrl, apiKey, clientId);
+			Connection.Configure(baseApiUrl, apiKey, clientId);
 		}
 
-		public async Task<List<Warehouse>> GetWarehouseListAsync()
-		{
-			var cmd = new GetWarehouseListCommand { Connection = Connection };
-			var result = await cmd.ExecuteAsync();
 
-			return result;
-		}
-		
-		public async Task<List<DeliveryMethod>> GetDeliveryMethodListAsync(DeliveryMethodListParameters pars)
+        public async Task<List<Warehouse>> GetWarehouseListAsync()
+        {
+            var cmd = new GetWarehouseListCommand { Connection = Connection };
+            var result = await cmd.ExecuteAsync();
+
+            return result;
+        }
+
+        public async Task<List<Category>> GetCategoryTreeAsync(CategoryTreeParameters prm = null)
+        {
+
+            var cmd = new GetCategoryTreeCommand { Connection = Connection };
+            var result = await cmd.ExecuteAsync(prm ?? new CategoryTreeParameters());
+
+            return result;
+        }
+
+        public async Task<List<CategoryAttributes>> GetCategoryAttributesAsync(CategoryAttributesParameters prm)
+        {
+
+            var cmd = new GetCategoryAttributesCommand { Connection = Connection };
+            var result = await cmd.ExecuteAsync(prm);
+
+            return result;
+        }
+
+        public async Task<List<AttributeValues>> GetAttributeValuesAsync(AttributeValuesParameters prm)
+        {
+
+            var cmd = new GetAttributeValuesCommand { Connection = Connection };
+            var result = await cmd.ExecuteAsync(prm);
+
+            return result;
+        }
+
+        public async Task<List<DeliveryMethod>> GetDeliveryMethodListAsync(DeliveryMethodListParameters pars)
 		{
 			var cmd = new GetDeliveryMethodListCommand { Connection = Connection };
 			var result = await cmd.ExecuteAsync(pars);

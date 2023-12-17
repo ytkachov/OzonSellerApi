@@ -1,0 +1,19 @@
+# editorconfig.org
+root = true
+
+[*.{c,cpp,h,hpp,idl,glsl,hlsl}]
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+
+[*.{cs,xaml,daml}]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{py}]
+indent_style = tab
+indent_size = 4
