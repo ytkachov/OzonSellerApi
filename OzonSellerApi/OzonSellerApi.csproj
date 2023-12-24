@@ -2,16 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <CommonIntermediateOutputPath>$(SolutionDir)objn</CommonIntermediateOutputPath>
+    <OutDir>$(SolutionDir)binn\$(Configuration)\</OutDir>
+    <OutputPath>$(CommonOutputPath)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>$(CommonIntermediateOutputPath)\$(Configuration)\$(MSBuildProjectName)</IntermediateOutputPath>
+    <LangVersion>8.0</LangVersion>
+    <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+    <EnableNETAnalyzers>False</EnableNETAnalyzers>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Commands\ApiCommands.cs~RF6e8e3f0.TMP" />
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="NLog" Version="4.7.11" />
-    <PackageReference Include="StringEnum.Net" Version="1.0.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog" Version="5.2.7" />
   </ItemGroup>
 
 </Project>

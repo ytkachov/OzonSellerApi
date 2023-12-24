@@ -8,7 +8,16 @@ using System.Xml.Linq;
 
 namespace OzonSellerApi.Model
 {
-	public class Category : IDEntity
+    public class OzonAuth
+    {
+        [JsonProperty("user_id")]
+        public string UserID { get; set; }
+
+        [JsonProperty("api_key")]
+        public string ApiKey { get; set; }
+    }
+
+    public class Category : IDEntity
 	{
 		[JsonProperty("category_id")]
 		public override long ID { get; set; }

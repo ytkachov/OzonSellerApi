@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonSellerApi", "OzonSeller
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{5DECD578-527E-4AF0-8E69-E694FFC4BB97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonSellerApiFW", "OzonSellerApi\OzonSellerApiFW.csproj", "{BCF9ABA2-0E9D-40BB-96D2-CCA72B144063}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5DECD578-527E-4AF0-8E69-E694FFC4BB97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DECD578-527E-4AF0-8E69-E694FFC4BB97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DECD578-527E-4AF0-8E69-E694FFC4BB97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCF9ABA2-0E9D-40BB-96D2-CCA72B144063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF9ABA2-0E9D-40BB-96D2-CCA72B144063}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF9ABA2-0E9D-40BB-96D2-CCA72B144063}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF9ABA2-0E9D-40BB-96D2-CCA72B144063}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

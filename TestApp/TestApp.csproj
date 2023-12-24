@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <CommonIntermediateOutputPath>$(SolutionDir)objn</CommonIntermediateOutputPath>
+    <OutDir>$(SolutionDir)binn\$(Configuration)\</OutDir>
+    <OutputPath>$(CommonOutputPath)\$(Configuration)\</OutputPath>
+    <LangVersion>8.0</LangVersion>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
