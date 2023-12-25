@@ -48,20 +48,20 @@ namespace OzonSellerApi
 			BaseApiUrl = baseApiUrl;
 		}
 
-		public async Task<HttpResponseMessage> PostRequestAsync(string jsonRequest, string apiRelativeUrl, HttpMethod method)
-		{
-			var httpContent = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+        public async Task<HttpResponseMessage> PostRequestAsync(string jsonRequest, string apiRelativeUrl, HttpMethod method)
+        {
+            var httpContent = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
 
-			HttpRequestMessage requestMessage = new HttpRequestMessage(method, apiRelativeUrl);
-			requestMessage.Headers.Add("Client-Id", ClientID);
-			requestMessage.Headers.Add("Api-Key", ApiKey);
-			//requestMessage.Headers.Add("Host", "api-seller.ozon.ru");
+            HttpRequestMessage requestMessage = new HttpRequestMessage(method, apiRelativeUrl);
+            requestMessage.Headers.Add("Client-Id", ClientID);
+            requestMessage.Headers.Add("Api-Key", ApiKey);
+            //requestMessage.Headers.Add("Host", "api-seller.ozon.ru");
 
-			requestMessage.Content = httpContent;
+            requestMessage.Content = httpContent;
 
-			var response = await client.SendAsync(requestMessage);
+            var response = await client.SendAsync(requestMessage);
 
-			return response;
-		}
-	}
+            return response;
+        }
+    }
 }

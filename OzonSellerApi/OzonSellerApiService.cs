@@ -26,11 +26,27 @@ namespace OzonSellerApi
 			Connection.Configure(baseApiUrl, apiKey, clientId);
 		}
 
+        public List<Warehouse> GetWarehouseList()
+        {
+            var cmd = new GetWarehouseListCommand { Connection = Connection };
+            var result = cmd.Execute();
+
+            return result;
+        }
 
         public async Task<List<Warehouse>> GetWarehouseListAsync()
         {
             var cmd = new GetWarehouseListCommand { Connection = Connection };
             var result = await cmd.ExecuteAsync();
+
+            return result;
+        }
+
+        public List<Category> GetCategoryTree(CategoryTreeParameters prm = null)
+        {
+
+            var cmd = new GetCategoryTreeCommand { Connection = Connection };
+            var result = cmd.Execute(prm ?? new CategoryTreeParameters());
 
             return result;
         }
@@ -44,11 +60,29 @@ namespace OzonSellerApi
             return result;
         }
 
+        public List<CategoryAttributes> GetCategoryAttributes(CategoryAttributesParameters prm)
+        {
+
+            var cmd = new GetCategoryAttributesCommand { Connection = Connection };
+            var result = cmd.Execute(prm);
+
+            return result;
+        }
+
         public async Task<List<CategoryAttributes>> GetCategoryAttributesAsync(CategoryAttributesParameters prm)
         {
 
             var cmd = new GetCategoryAttributesCommand { Connection = Connection };
             var result = await cmd.ExecuteAsync(prm);
+
+            return result;
+        }
+
+        public List<AttributeValues> GetAttributeValues(AttributeValuesParameters prm)
+        {
+
+            var cmd = new GetAttributeValuesCommand { Connection = Connection };
+            var result = cmd.Execute(prm);
 
             return result;
         }
@@ -62,12 +96,20 @@ namespace OzonSellerApi
             return result;
         }
 
-        public async Task<List<DeliveryMethod>> GetDeliveryMethodListAsync(DeliveryMethodListParameters pars)
-		{
-			var cmd = new GetDeliveryMethodListCommand { Connection = Connection };
-			var result = await cmd.ExecuteAsync(pars);
+        public List<DeliveryMethod> GetDeliveryMethodList(DeliveryMethodListParameters pars)
+        {
+            var cmd = new GetDeliveryMethodListCommand { Connection = Connection };
+            var result = cmd.Execute(pars);
 
-			return result;
-		}
-	}
+            return result;
+        }
+
+        public async Task<List<DeliveryMethod>> GetDeliveryMethodListAsync(DeliveryMethodListParameters pars)
+        {
+            var cmd = new GetDeliveryMethodListCommand { Connection = Connection };
+            var result = await cmd.ExecuteAsync(pars);
+
+            return result;
+        }
+    }
 }

@@ -29,7 +29,7 @@ namespace OzonSellerApi.Model
 
     public class CategoryAttributesParameters : ApiMethodParamsBase
     {
-        [JsonProperty("category_id")]
+        [JsonProperty("description_category_id")]
         public long CategoryID { get; set; }
 
         [JsonProperty("type_id")]
@@ -38,7 +38,7 @@ namespace OzonSellerApi.Model
 
     public class AttributeValuesParameters : ApiMethodParamsBase
     {
-        [JsonProperty("category_id")]
+        [JsonProperty("description_category_id")]
         public long CategoryID { get; set; }
 
         [JsonProperty("type_id")]

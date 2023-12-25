@@ -7,11 +7,11 @@ using OzonSellerApi;
 using OzonSellerApi.Enums;
 using OzonSellerApi.Model;
 
-namespace TestApp
+namespace TestAppAsync
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var ozon_auth_str = File.ReadAllText(@"D:\Projects\Mayya Necklace\OzonSellerApi\ozon_seller_id.json");
             var ozon_auth = JsonToolkit.ParseAsJson<OzonAuth>(ozon_auth_str);
@@ -22,8 +22,8 @@ namespace TestApp
             //var result = await ApiService.GetCategoryTreeAsync();
             //Debug.WriteLine(result.ToPrettyJson());
 
-            var r1 = ApiService.GetCategoryAttributes(new CategoryAttributesParameters() { CategoryID = 17027899, TypeID = 87458887 });
-            //Debug.WriteLine(r1.ToPrettyJson());
+            var r1 = await ApiService.GetCategoryAttributesAsync(new CategoryAttributesParameters() { CategoryID = 17027899, TypeID = 87458887 });
+            Debug.WriteLine(r1.ToPrettyJson());
 
             foreach (var ca in r1)
             {
@@ -36,7 +36,7 @@ namespace TestApp
                 int limit = 5000;
                 while (true)
                 {
-                    var r2 = ApiService.GetAttributeValues(new AttributeValuesParameters() { CategoryID = 17027899, TypeID = 87458887, AttributeID = ca.ID, Limit = limit, LastValueID = lastid });
+                    var r2 = await ApiService.GetAttributeValuesAsync(new AttributeValuesParameters() { CategoryID = 17027899, TypeID = 87458887, AttributeID = ca.ID, Limit = limit, LastValueID = lastid });
                     Debug.WriteLine(r2.ToPrettyJson());
 
                     if (r2.Count < limit)
@@ -46,5 +46,6 @@ namespace TestApp
                 }
             }
         }
+
     }
 }

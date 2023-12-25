@@ -19,7 +19,7 @@ namespace OzonSellerApi.Model
 
     public class Category : IDEntity
 	{
-		[JsonProperty("category_id")]
+		[JsonProperty("description_category_id")]
 		public override long ID { get; set; }
 
         [JsonProperty("category_name")]

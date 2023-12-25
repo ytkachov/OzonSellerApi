@@ -74,57 +74,52 @@ namespace OzonSellerApi.Commands
 			return Response.Result;
 		}
 
+        public virtual TOut Execute(ApiMethodParamsBase data = null)
+        {
+            var request = PrepareRequest(data);
+            try
+            {
+                HttpResponseMessage response = Task.Run(() => Connection.PostRequestAsync(request, Url, Method)).Result;
+                // if wrong api URL or server is broken we won't get json result
+                if (response.Content.Headers.ContentType.MediaType == "text/plain")
+                    throw new ApiException("Unexpected response: " + $"{(int)response.StatusCode}. {response.ReasonPhrase}" + ", url: " + Url, response.Content);
 
-		public virtual async Task<TOut> ExecuteAsync(ApiMethodParamsBase data = null)
+                JsonResponse = Task.Run(() => response.Content.ReadAsStringAsync()).Result;
+                return ProcessResponse(response);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, $"Error requesting Url {Url}.\r\nRequest: {request}\r\nResponse: {JsonResponse}. {Environment.NewLine} {ex.Message}");
+                throw;
+            }
+        }
+
+
+        protected virtual string PrepareRequest(ApiMethodParamsBase data = null)
+        {
+            if (Connection == null)
+                throw new ApiException("Connection object is not defined");
+
+            if (data != null)
+                MethodParameters = data;
+
+            logger.Info($"{this.GetType().Name} = {Url}, {data?.GetType().Name}");
+
+            return MethodParameters?.ToJson();
+        }
+
+        public virtual async Task<TOut> ExecuteAsync(ApiMethodParamsBase data = null)
 		{
-			if (Connection == null)
-				throw new ApiException("Connection object is not defined");
-
-			if (data != null)
-			{
-				MethodParameters = data;
-			}
-
-			logger.Info($"{this.GetType().Name} = {Url}, {data?.GetType().Name}");
-
-			var request = MethodParameters?.ToJson();
+            var request = PrepareRequest(data);
 			try
 			{
 				HttpResponseMessage response = await Connection.PostRequestAsync(request, Url, Method);
-				
-				var currentInfoMessage = $"{(int)response.StatusCode}. {response.ReasonPhrase}";
-				logger.Info(currentInfoMessage);
-				
-				// if wrong api URL or server is broken we won't get json result
-				if (response.Content.Headers.ContentType.MediaType == "text/plain")
-					throw new ApiException("Unexpected response: " + currentInfoMessage + ", url: " + Url, response.Content);
+                // if wrong api URL or server is broken we won't get json result
+                if (response.Content.Headers.ContentType.MediaType == "text/plain")
+                    throw new ApiException("Unexpected response: " + $"{(int)response.StatusCode}. {response.ReasonPhrase}" + ", url: " + Url, response.Content);
 
-				JsonResponse = await response.Content.ReadAsStringAsync();
-				JsonResponse = JsonResponse.DecodeEncodedNonAsciiCharacters();
-				
-				var outResult = Deserialize(JsonResponse, response);
-
-				switch ((int)response.StatusCode)
-				{
-					// documented response status codes
-					case (int)HttpStatusCode.NotFound:
-					case (int)HttpStatusCode.Forbidden:
-					case (int)HttpStatusCode.Unauthorized:
-					case (int)HttpStatusCode.Conflict:
-					case (int)HttpStatusCode.InternalServerError:
-					case (int)HttpStatusCode.OK:
-						break;
-
-					default:
-						throw new ApiException("Unexpected http status code: " + currentInfoMessage, response.Content);
-				}
-
-				if (outResult.Count > 0 && outResult[0] is IDEntity)
-				{
-					logger.Info($"{this.GetType().Name} = {Url}, {data?.GetType().Name},OutID={(outResult[0] as IDEntity).ID}");
-				}
-
-				return outResult;
+                JsonResponse = await response.Content.ReadAsStringAsync();
+                return ProcessResponse(response);
 			}
 			catch (Exception ex)
 			{
@@ -132,5 +127,28 @@ namespace OzonSellerApi.Commands
 				throw;
 			}
 		}
-	}
+
+        private TOut ProcessResponse(HttpResponseMessage response)
+        {
+            JsonResponse = JsonResponse.DecodeEncodedNonAsciiCharacters();
+            var outResult = Deserialize(JsonResponse, response);
+
+            switch ((int)response.StatusCode)
+            {
+                // documented response status codes
+                case (int)HttpStatusCode.NotFound:
+                case (int)HttpStatusCode.Forbidden:
+                case (int)HttpStatusCode.Unauthorized:
+                case (int)HttpStatusCode.Conflict:
+                case (int)HttpStatusCode.InternalServerError:
+                case (int)HttpStatusCode.OK:
+                    break;
+
+                default:
+                    throw new ApiException("Unexpected http status code", response.Content);
+            }
+
+            return outResult;
+        }
+    }
 }
