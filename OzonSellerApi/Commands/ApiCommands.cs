@@ -16,12 +16,12 @@ namespace OzonSellerApi.ApiCommands
 	}
 
     [ApiPostCommand(Url = "/description-category/attribute")]
-    public class GetCategoryAttributesCommand : ApiCommandBase<List<CategoryAttributes>>
+    public class GetCategoryAttributesCommand : ApiCommandBase<List<CategoryAttribute>>
     {
     }
 
     [ApiPostCommand(Url = "/description-category/attribute/values")]
-    public class GetAttributeValuesCommand : ApiCommandBase<List<AttributeValues>>
+    public class GetAttributeValuesCommand : ApiCommandBase<List<AttributeValue>>
     {
     }
 

@@ -19,15 +19,15 @@ namespace TestApp
             var ApiService = OzonSellerApiService.Instance;
             ApiService.Configure("https://api-seller.ozon.ru", ozon_auth.ApiKey, ozon_auth.UserID);
 
-            //var result = await ApiService.GetCategoryTreeAsync();
-            //Debug.WriteLine(result.ToPrettyJson());
+            var result = ApiService.GetCategoryTree();
+            Debug.WriteLine(result.ToPrettyJson());
 
             var r1 = ApiService.GetCategoryAttributes(new CategoryAttributesParameters() { CategoryID = 17027899, TypeID = 87458887 });
-            //Debug.WriteLine(r1.ToPrettyJson());
+            Debug.WriteLine(r1.ToPrettyJson());
 
             foreach (var ca in r1)
             {
-                if (ca.DictionaryID == 0 || ca.ID != 22232)
+                if (ca.DictionaryID == 0 || ca.ID != 5309)
                     continue;
 
                 Debug.WriteLine($"{ca.ID} : {ca.Name} // {ca.Description} --------------------------");

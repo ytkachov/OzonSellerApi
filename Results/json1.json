@@ -1,0 +1,38 @@
+{
+  "result": [
+    {
+      "description_category_id": 17027493,
+      "category_name": "Галантерея и украшения",
+      "disabled": false,
+      "children": [
+        {
+          "description_category_id": 17027903,
+          "category_name": "Подарочный сертификат Ozon",
+          "disabled": true,
+          "children": [
+            {
+              "type_name": "Банковская карта",
+              "type_id": 971229967,
+              "disabled": true,
+              "children": []
+            },
+            {
+              "type_name": "Электронный подарочный сертификат",
+              "type_id": 94957,
+              "disabled": true,
+              "children": []
+            },
+            {
+              "type_name": "Подарочный сертификат",
+              "type_id": 94955,
+              "disabled": true,
+              "children": []
+            },
+            {
+              "type_name": "Ozon.Card",
+              "type_id": 277418272,
+              "disabled": true,
+              "children": []
+            },
+            {
+            }

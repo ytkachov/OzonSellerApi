@@ -39,7 +39,7 @@ namespace OzonSellerApi.Model
 
 	}
 
-	public class CategoryAttributes : IDEntity
+	public class CategoryAttribute : IDEntity
 	{
 		[JsonProperty("description")]
         public string Description { get; set; }  // Описание характеристики.
@@ -79,8 +79,11 @@ namespace OzonSellerApi.Model
         public string TypeName { get; set; } // Тип характеристики.
     }
 
-	public class AttributeValues : IDEntity
+	public class AttributeValue : IDEntity
 	{
+        [JsonProperty("id")]
+        public override long ID { get; set; }    // идентификатор значения атрибута.
+
         [JsonProperty("info")]
         public string Info { get; set; }  // Дополнительное описание.
 
@@ -89,6 +92,97 @@ namespace OzonSellerApi.Model
 
         [JsonProperty("value")]
         public string Value { get; set; } // Значение характеристики товара.
+    }
+
+    public class ItemAttribuiteValue
+    {
+        [JsonProperty("dictionary_value_id", NullValueHandling = NullValueHandling.Ignore)]
+        public long? ID { get; set; }    // идентификатор значения из словаря.
+
+        [JsonProperty("value")]
+        public object Value { get; set; }
+    }
+
+    public class ItemAttribute : IDEntity
+    {
+        [JsonProperty("id")]
+        public override long ID { get; set; }    // идентификатор значения атрибута.
+
+        [JsonProperty("complex_id")]
+        public long ComplexID { get; set; } = 0;
+
+        [JsonProperty("values")]
+        public ItemAttribuiteValue[] Values { get; set; }
+
+    }
+
+    public class ItemInfo
+    {
+        [JsonProperty("description_category_id")]
+        public long CategoryID { get; set; }
+
+        [JsonProperty("offer_id")]
+        public string OfferID { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("barcode")]
+        public string Barcode { get; set; }
+
+        [JsonProperty("depth")]
+        public int Depth { get; set; }
+
+        [JsonProperty("height")]
+        public int Height { get; set; } 
+
+        [JsonProperty("width")]
+        public int Width { get; set; }
+
+        [JsonProperty("dimension_unit")]
+        public string DimensionUnit { get; set; }
+
+        [JsonProperty("weight")]
+        public int Weight { get; set; }
+
+        [JsonProperty("weight_unit")]
+        public string WeightUnit { get; set; }
+
+        [JsonProperty("primary_image")]
+        public string PrimaryImage { get; set; }
+
+        [JsonProperty("images")]
+        public string Images { get; set; }
+
+        [JsonProperty("images360")]
+        public string Images360 { get; set; }
+
+        [JsonProperty("color_image")]
+        public string ColorImage { get; set; }
+
+        [JsonProperty("price")]
+        public string Price { get; set; }
+
+        [JsonProperty("old_price")]
+        public string OldPrice { get; set; }
+
+        [JsonProperty("premium_price")]
+        public string PremiumPrice { get; set; }
+
+        [JsonProperty("currency_code")]
+        public string CurrencyCode { get; set; }
+
+        [JsonProperty("vat")]
+        public string VAT { get; set; }
+
+        [JsonProperty("pdf_list")]
+        public string PdfList { get; set; }
+
+        [JsonProperty("attributes")]
+        public ItemAttribute[] Attributes { get; set; }
+
+        [JsonProperty("complex_attributes")]
+        public ItemAttribute[] ComplexAttributes { get; set; }
     }
 
     public class Warehouse : IDEntity

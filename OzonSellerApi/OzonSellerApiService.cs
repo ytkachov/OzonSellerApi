@@ -60,7 +60,7 @@ namespace OzonSellerApi
             return result;
         }
 
-        public List<CategoryAttributes> GetCategoryAttributes(CategoryAttributesParameters prm)
+        public List<CategoryAttribute> GetCategoryAttributes(CategoryAttributesParameters prm)
         {
 
             var cmd = new GetCategoryAttributesCommand { Connection = Connection };
@@ -69,7 +69,7 @@ namespace OzonSellerApi
             return result;
         }
 
-        public async Task<List<CategoryAttributes>> GetCategoryAttributesAsync(CategoryAttributesParameters prm)
+        public async Task<List<CategoryAttribute>> GetCategoryAttributesAsync(CategoryAttributesParameters prm)
         {
 
             var cmd = new GetCategoryAttributesCommand { Connection = Connection };
@@ -78,7 +78,7 @@ namespace OzonSellerApi
             return result;
         }
 
-        public List<AttributeValues> GetAttributeValues(AttributeValuesParameters prm)
+        public List<AttributeValue> GetAttributeValues(AttributeValuesParameters prm)
         {
 
             var cmd = new GetAttributeValuesCommand { Connection = Connection };
@@ -87,7 +87,7 @@ namespace OzonSellerApi
             return result;
         }
 
-        public async Task<List<AttributeValues>> GetAttributeValuesAsync(AttributeValuesParameters prm)
+        public async Task<List<AttributeValue>> GetAttributeValuesAsync(AttributeValuesParameters prm)
         {
 
             var cmd = new GetAttributeValuesCommand { Connection = Connection };
