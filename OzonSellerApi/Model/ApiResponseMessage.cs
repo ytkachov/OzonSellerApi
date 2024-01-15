@@ -23,7 +23,7 @@ namespace OzonSellerApi.Model
 		public ApiError Error { get; set; }
 	}
 
-	public class ApiSimpleResponseMessage<TOut> : ApiResponseMessageBase where TOut : System.Collections.IList
+	public class ApiSimpleResponseMessage<TOut> : ApiResponseMessageBase 
 	{
 		[JsonProperty("has_next")]
 		public bool HasNext { get; set; }

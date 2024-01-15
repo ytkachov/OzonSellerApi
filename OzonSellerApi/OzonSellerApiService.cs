@@ -96,6 +96,24 @@ namespace OzonSellerApi
             return result;
         }
 
+        public ImportTaskID ProductImport(ProductImportParameters prm)
+        {
+
+            var cmd = new ProductImportCommand { Connection = Connection };
+            var result = cmd.Execute(prm);
+
+            return result;
+        }
+
+        public async Task<ImportTaskID> ProductImportAsync(ProductImportParameters prm)
+        {
+
+            var cmd = new ProductImportCommand { Connection = Connection };
+            var result = await cmd.ExecuteAsync(prm);
+
+            return result;
+        }
+
         public List<DeliveryMethod> GetDeliveryMethodList(DeliveryMethodListParameters pars)
         {
             var cmd = new GetDeliveryMethodListCommand { Connection = Connection };

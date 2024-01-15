@@ -103,20 +103,19 @@ namespace OzonSellerApi.Model
         public object Value { get; set; }
     }
 
-    public class ItemAttribute : IDEntity
+    public class ProductAttribute
     {
         [JsonProperty("id")]
-        public override long ID { get; set; }    // идентификатор значения атрибута.
+        public long ID { get; set; }    // идентификатор значения атрибута.
 
         [JsonProperty("complex_id")]
         public long ComplexID { get; set; } = 0;
 
         [JsonProperty("values")]
         public ItemAttribuiteValue[] Values { get; set; }
-
     }
 
-    public class ItemInfo
+    public class ProductInfo : ApiMethodParamsBase
     {
         [JsonProperty("description_category_id")]
         public long CategoryID { get; set; }
@@ -127,14 +126,14 @@ namespace OzonSellerApi.Model
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("barcode")]
+        [JsonProperty("barcode", NullValueHandling = NullValueHandling.Ignore)]
         public string Barcode { get; set; }
 
         [JsonProperty("depth")]
         public int Depth { get; set; }
 
         [JsonProperty("height")]
-        public int Height { get; set; } 
+        public int Height { get; set; }
 
         [JsonProperty("width")]
         public int Width { get; set; }
@@ -148,16 +147,16 @@ namespace OzonSellerApi.Model
         [JsonProperty("weight_unit")]
         public string WeightUnit { get; set; }
 
-        [JsonProperty("primary_image")]
+        [JsonProperty("primary_image", NullValueHandling = NullValueHandling.Ignore)]
         public string PrimaryImage { get; set; }
 
-        [JsonProperty("images")]
-        public string Images { get; set; }
+        [JsonProperty("images", NullValueHandling = NullValueHandling.Ignore)]
+        public string[] Images { get; set; }
 
-        [JsonProperty("images360")]
-        public string Images360 { get; set; }
+        [JsonProperty("images360", NullValueHandling = NullValueHandling.Ignore)]
+        public string[] Images360 { get; set; }
 
-        [JsonProperty("color_image")]
+        [JsonProperty("color_image", NullValueHandling = NullValueHandling.Ignore)]
         public string ColorImage { get; set; }
 
         [JsonProperty("price")]
@@ -179,10 +178,17 @@ namespace OzonSellerApi.Model
         public string PdfList { get; set; }
 
         [JsonProperty("attributes")]
-        public ItemAttribute[] Attributes { get; set; }
+        public ProductAttribute[] Attributes { get; set; }
 
-        [JsonProperty("complex_attributes")]
-        public ItemAttribute[] ComplexAttributes { get; set; }
+        [JsonProperty("complex_attributes", NullValueHandling = NullValueHandling.Ignore)]
+        public ProductAttribute[] ComplexAttributes { get; set; }
+    }
+
+
+    public class ImportTaskID
+    {
+        [JsonProperty("task_id")]
+        public long TaskID { get; set; }
     }
 
     public class Warehouse : IDEntity

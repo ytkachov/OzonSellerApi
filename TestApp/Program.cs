@@ -27,7 +27,7 @@ namespace TestApp
 
             foreach (var ca in r1)
             {
-                if (ca.DictionaryID == 0 || ca.ID != 5309)
+                if (ca.DictionaryID == 0 || ca.ID != 9163 && ca.ID != 9390)
                     continue;
 
                 Debug.WriteLine($"{ca.ID} : {ca.Name} // {ca.Description} --------------------------");

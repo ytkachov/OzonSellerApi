@@ -15,7 +15,7 @@ using System.Web;
 
 namespace OzonSellerApi.Commands
 {
-	public class ApiCommandBase<TOut> where TOut : System.Collections.IList
+	public class ApiCommandBase<TOut>
 	{
 		private ApiCommandAttributeBase _api_command_attribute;
 		private readonly static ILogger logger = LogManager.GetCurrentClassLogger();
@@ -74,6 +74,19 @@ namespace OzonSellerApi.Commands
 			return Response.Result;
 		}
 
+        protected virtual string PrepareRequest(ApiMethodParamsBase data = null)
+        {
+            if (Connection == null)
+                throw new ApiException("Connection object is not defined");
+
+            if (data != null)
+                MethodParameters = data;
+
+            logger.Info($"{this.GetType().Name} = {Url}, {data?.GetType().Name}");
+
+            return MethodParameters?.ToJson();
+        }
+
         public virtual TOut Execute(ApiMethodParamsBase data = null)
         {
             var request = PrepareRequest(data);
@@ -92,20 +105,6 @@ namespace OzonSellerApi.Commands
                 logger.Error(ex, $"Error requesting Url {Url}.\r\nRequest: {request}\r\nResponse: {JsonResponse}. {Environment.NewLine} {ex.Message}");
                 throw;
             }
-        }
-
-
-        protected virtual string PrepareRequest(ApiMethodParamsBase data = null)
-        {
-            if (Connection == null)
-                throw new ApiException("Connection object is not defined");
-
-            if (data != null)
-                MethodParameters = data;
-
-            logger.Info($"{this.GetType().Name} = {Url}, {data?.GetType().Name}");
-
-            return MethodParameters?.ToJson();
         }
 
         public virtual async Task<TOut> ExecuteAsync(ApiMethodParamsBase data = null)

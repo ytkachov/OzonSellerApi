@@ -54,6 +54,12 @@ namespace OzonSellerApi.Model
         public long Limit { get; set; } = 5000;
     }
 
+    public class ProductImportParameters : ApiMethodParamsBase
+    {
+        [JsonProperty("items")]
+        public ProductInfo[] Items { get; set; }
+    }
+
     public class DeliveryMethodListParameters : ApiMethodParamsWithFilter<DeliveryMethodListFilter>
 	{
 		[JsonProperty("offset")]

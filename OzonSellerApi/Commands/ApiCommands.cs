@@ -25,6 +25,11 @@ namespace OzonSellerApi.ApiCommands
     {
     }
 
+    [ApiPostCommand(Url = "/product/import", SchemaVersion = SchemaVersion.v3)]
+    public class ProductImportCommand : ApiCommandBase<ImportTaskID>
+    {
+    }
+
 
     // did not test it
     [ApiPostCommand(Url = "/warehouse/list")]
